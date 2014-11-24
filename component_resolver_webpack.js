@@ -1,31 +1,28 @@
+var path = require('path');
+
+// Captures component id (e.g 'feedback_form' from 'feedback/feedback_form').
+var COMPONENT_ID_PATTERN = /([^\/]+)$/;
+
 var ComponentResolverPlugin = function() {};
 
 ComponentResolverPlugin.prototype.apply = function(resolver) {
-
   resolver.plugin('directory', function(request, callback) {
+    var enclosingDirPath = path.join(request.path, request.request || '');
+    var captured = enclosingDirPath.match(COMPONENT_ID_PATTERN);
 
-    var fullPath;
-    if (!request.request) {
-      fullPath = request.path
-    } else {
-      fullPath = request.path + '/' + request.request
-    }
+    if (captured) {
+      var componentId = captured[1];
+      // TODO: Allow to use any or set of extensions
+      var componentFileName = componentId + '.jsx';
+      var componentFilePath = path.join(enclosingDirPath, componentFileName);
 
-    var captures = fullPath.match(/([^\/]+)$/);
-
-    if (captures) {
-      var fs = this.fileSystem;
-      var componentName = captures[1];
-      var componentFileName = componentName + '.jsx';
-      var componentEntryPath = fullPath + '/' + componentFileName;
-
-      fs.stat(componentEntryPath, function(err, stats) {
+      this.fileSystem.stat(componentFilePath, function(err, stats) {
         if (err || !stats.isFile()) {
           return callback();
         }
 
         this.doResolve('file', {
-          path: fullPath,
+          path: enclosingDirPath,
           query: request.query,
           request: componentFileName
         }, callback);
