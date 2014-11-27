@@ -2,13 +2,24 @@
   "name": "component-resolver-webpack",
   "version": "0.1.0",
   "description": "Webpack plugin that simplifies process of components loading",
-  "main": "component_resolver_webpack.js",
+  "main": "resolver.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/kossnocorp/component-resolver-webpack"
   },
-  "keywords": ["webpack"],
+  "keywords": [
+    "webpack"
+  ],
   "author": "Sasha Koss <kossnocorp@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.1",
+    "sinon-chai": "^2.6.0"
+    },
+    "scripts": {
+      "test": "mocha \"./**/__tests__/*.js\" --require \"./__tests__/_test_helper\" --recursive --reporter spec",
+      "autotest": "npm test -- --watch"
+    }
 }
-
