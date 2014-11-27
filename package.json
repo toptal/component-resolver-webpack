@@ -1,6 +1,6 @@
 {
   "name": "component-resolver-webpack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Webpack plugin that simplifies process of components loading",
   "main": "resolver.js",
   "repository": {

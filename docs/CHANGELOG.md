@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.1.1 (Unreleased)
+## v0.1.1 (Nov 27 2014)
 
 * Improvements:
   - Code was refactored
