@@ -19,6 +19,12 @@ describe('ComponentResolverPlugin behavior', function() {
 
   var fixturesDir = path.join(__dirname, '_fixtures');
 
+  afterEach(function() {
+    if (resolveContext.doResolve.restore) {
+      resolveContext.doResolve.restore();
+    }
+  });
+
   context('with default extransions set', function() {
     beforeEach(function() {
       emulateAndExtract();
@@ -103,13 +109,77 @@ describe('ComponentResolverPlugin behavior', function() {
         path: path.join(fixturesDir, 'dir_with_file')
       };
     });
+  });
 
-    context('when few extensions were specefied', function() {
-      var request = {
-        path: fixturesDir,
-        request: 'dir_with_file',
-        query: 'qwerty'
-      };
+  context('with specefied extensions', function() {
+    var request = {
+      path: fixturesDir,
+      request: 'dir_with_few_files',
+      query: 'qwerty'
+    };
+
+    context('when none of passed extensions are found', function() {
+      beforeEach(function() {
+        emulateAndExtract(['ts', 'cljs']);
+      });
+
+      it('calls callback', function(done) {
+        resolveFn(request, done);
+      });
+    });
+
+    context('when first specified extension is found', function() {
+      beforeEach(function() {
+        emulateAndExtract(['js', 'jsx', 'coffee']);
+      });
+
+      it('calls doResolve on context with proper arguments', function(done) {
+        var cb = function() {};
+        var doResolve = sinon.spy(resolveContext, 'doResolve');
+        resolveFn(request, cb);
+
+        setTimeout(function() {
+          expect(doResolve).to.be.calledWith(
+            'file',
+            sinon.match({
+              path: path.join(request.path, request.request),
+              query: 'qwerty',
+              request: request.request + '.js'
+            },
+            cb
+         ));
+
+          doResolve.restore();
+          done();
+        }, 10);
+      });
+    });
+
+    context('when second specefied extension is found', function() {
+      beforeEach(function() {
+        emulateAndExtract(['ts', 'jsx', 'coffee']);
+      });
+
+      it('calls doResolve on context with proper arguments', function(done) {
+        var cb = function() {};
+        var doResolve = sinon.spy(resolveContext, 'doResolve');
+        resolveFn(request, cb);
+
+        setTimeout(function() {
+          expect(doResolve).to.be.calledWith(
+            'file',
+            sinon.match({
+              path: path.join(request.path, request.request),
+              query: 'qwerty',
+              request: request.request + '.jsx'
+            },
+            cb
+         ));
+
+          doResolve.restore();
+          done();
+        }, 10);
+      });
     });
   });
 });

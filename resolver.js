@@ -10,21 +10,33 @@ var getResolveComponent = function(exts) {
 
     if (captured) {
       var componentId = captured[1];
-      // TODO: Allow to use any or set of extensions
-      var componentFileName = componentId + '.jsx';
-      var componentFilePath = path.join(enclosingDirPath, componentFileName);
+      var context = this;
 
-      this.fileSystem.stat(componentFilePath, function(err, stats) {
-        if (err || !stats.isFile()) {
+      var tryToFindExtension = function(index) {
+        var ext = exts[index];
+
+        // None of passed extensions are found
+        if (!ext) {
           return callback();
         }
 
-        this.doResolve('file', {
-          path: enclosingDirPath,
-          query: request.query,
-          request: componentFileName
-        }, callback);
-      }.bind(this));
+        var componentFileName = componentId + '.' + ext;
+        var componentFilePath = path.join(enclosingDirPath, componentFileName);
+
+        context.fileSystem.stat(componentFilePath, function(err, stats) {
+          if (err || !stats.isFile()) {
+            return tryToFindExtension(index + 1);
+          }
+
+          context.doResolve('file', {
+            path: enclosingDirPath,
+            query: request.query,
+            request: componentFileName
+          }, callback);
+        });
+      };
+
+      tryToFindExtension(0);
 
     } else {
       callback();
