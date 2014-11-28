@@ -45,7 +45,7 @@ var getResolveComponent = function(exts) {
 };
 
 var ComponentResolverPlugin = function(exts) {
-  this.exts = exts || ['jsx'];
+  this.exts = exts || ['jsx', 'js'];
 };
 
 ComponentResolverPlugin.prototype.apply = function(resolver) {
