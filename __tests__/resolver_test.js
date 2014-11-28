@@ -2,8 +2,9 @@ var fs = require('fs');
 var path = require('path');
 var ComponentResolverPlugin = require('../resolver');
 
-describe('ComponentResolverPlugin behavior', function() {
-  // Emulate webpack plugin setup & extract resolve function
+// Emulate webpack plugin setup & extract resolve function
+var emulateAndExtract = function(exts) {
+  // TODO: Use extensions array
   var resolveFn;
   var resolveContext = {
     fileSystem: fs,
@@ -12,6 +13,17 @@ describe('ComponentResolverPlugin behavior', function() {
   ComponentResolverPlugin.prototype.apply({
     plugin: function(__, fn) { resolveFn = fn.bind(resolveContext) }
   });
+
+  return {
+    fn: resolveFn,
+    context: resolveContext
+  };
+}
+
+describe('ComponentResolverPlugin behavior', function() {
+  var extracted = emulateAndExtract();
+  var resolveFn = extracted.fn;
+  var resolveContext = extracted.context;
 
   var fixturesDir = path.join(__dirname, '_fixtures');
 
@@ -93,6 +105,15 @@ describe('ComponentResolverPlugin behavior', function() {
     var request = {
       path: path.join(fixturesDir, 'dir_with_file')
     };
+  });
+
+  context('when few extensions were specefied', function() {
+    var request = {
+      path: fixturesDir,
+      request: 'dir_with_file',
+      query: 'qwerty'
+    };
+
   });
 });
 
