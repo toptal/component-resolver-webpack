@@ -12,6 +12,9 @@
   ],
   "author": "Sasha Koss <kossnocorp@gmail.com>",
   "license": "MIT",
+  "peerDependencies": {
+    "webpack": "1.x"
+  },
   "devDependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.0.1",
