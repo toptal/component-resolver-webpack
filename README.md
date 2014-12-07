@@ -1,5 +1,10 @@
 # component-resolver-webpack
 
+[Webpack](http://webpack.github.io) plugin that provides simple convention on
+how to organize components.
+
+_**Component should be placed in directory named as component it self**._
+
 ## Installation
 
 ```
