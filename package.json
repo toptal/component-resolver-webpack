@@ -2,7 +2,7 @@
   "name": "component-resolver-webpack",
   "version": "0.2.0",
   "description": "Webpack plugin that simplifies process of components loading",
-  "main": "resolver.js",
+  "main": "src/resolver.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/kossnocorp/component-resolver-webpack"
@@ -17,9 +17,9 @@
     "mocha": "^2.0.1",
     "sinon": "^1.12.1",
     "sinon-chai": "^2.6.0"
-    },
-    "scripts": {
-      "test": "mocha \"./**/__tests__/*.js\" --require \"./__tests__/_test_helper\" --recursive --reporter spec",
-      "autotest": "npm test -- --watch"
-    }
+  },
+  "scripts": {
+    "test": "mocha \"./**/__tests__/*.js\" --require \"./src/__tests__/_test_helper\" --recursive --reporter spec",
+    "autotest": "npm test -- --watch"
+  }
 }
