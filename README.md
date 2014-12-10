@@ -61,11 +61,9 @@ module.exports = {
   
   resolve: {
     modulesDirectories: [
-      'new',
-      'app/components',
-      'app',
-      'spec',
-      'node_modules'
+      // It will allow to use path without leading `./` in require
+      // for directories placed in `app`:
+      'app'
     ]
   }
 }
