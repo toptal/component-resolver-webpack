@@ -1,5 +1,0 @@
-# Roadmap
-
-- Simpler API
-- README
-
