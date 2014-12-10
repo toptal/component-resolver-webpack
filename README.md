@@ -18,7 +18,7 @@ var Button = require('ui/button/button.jsx');
 **Why not `'ui/button.jsx'`?**
 
 Because then you can use directories as module containers. As an example, you can
-conbine `component-resolver-webpack`with 
+combine `component-resolver-webpack` with 
 [`component-css-loader`](https://github.com/toptal/component-css-loader):
 
 ``` js
