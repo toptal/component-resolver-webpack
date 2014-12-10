@@ -1,7 +1,7 @@
 # component-resolver-webpack
 
 [Webpack](http://webpack.github.io) plugin that provides simple convention on
-how to organize components: _**component should be placed in directory named 
+how to organize components: _**component file should be placed in directory named 
 as component it self**._
 
 It allows to shorten `require` calls and make them more expressive:
@@ -12,9 +12,11 @@ var Button = require('ui/button');
 var Button = require('ui/button/button.jsx');
 ```
 
-Why not `'ui/button.jsx'`? Because then you can use directories
-as module container. As an example, you can conbine `component-resolver-webpack`
-with [`component-css-loader`](https://github.com/toptal/component-css-loader):
+**Why not `'ui/button.jsx'`?**
+
+Because then you can use directories as module containers. As an example, you can
+conbine `component-resolver-webpack`with 
+[`component-css-loader`](https://github.com/toptal/component-css-loader):
 
 ``` js
 var Button = require('ui/button');
@@ -23,6 +25,8 @@ var Button = require('ui/button');
 require('ui/button/button.styl');
 var Button = require('ui/button/button.jsx');
 ```
+
+Directory also may contain tests ([Jest](https://facebook.github.io/jest/)-like approach).
 
 ## Installation
 
