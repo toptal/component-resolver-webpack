@@ -33,7 +33,7 @@ Directory also may contain tests ([Jest](https://facebook.github.io/jest/)-like 
 
 ## Installation
 
-Install via `npm`:
+Install via [npm](https://www.npmjs.com/package/component-resolver-webpack):
 
 ```
 npm install --save-dev component-resolver-webpack
