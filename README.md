@@ -11,8 +11,6 @@ _**Component should be placed in directory named as component it self**._
 npm install --save-dev component-resolver-webpack
 ```
 
-## Usage
-
 `webpack.config.js`:
 ``` javascript
 var webpack = require('webpack');
@@ -29,3 +27,15 @@ module.exports = {
 };
 ```
 
+## Usage
+
+
+``` js
+var Button = require('ui/button');
+```
+
+... instead of:
+
+``` js
+var Button = require('ui/button/button.jsx');
+```
