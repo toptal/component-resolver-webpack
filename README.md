@@ -2,8 +2,8 @@
 [![Build Status](https://travis-ci.org/toptal/component-resolver-webpack.svg?branch=master)](https://travis-ci.org/toptal/component-resolver-webpack) [![component-resolver-webpack](http://img.shields.io/npm/v/component-resolver-webpack.svg)]()`component-resolver-webpack` ([changelog](https://github.com/toptal/component-resolver-webpack/blob/master/docs/CHANGELOG.md))
 
 [Webpack](http://webpack.github.io) plugin that provides simple convention on
-how to organize components: _**component file should be placed in directory named 
-as component it self**._
+how to organize components:
+> Component file should be placed in directory named as component it self.
 
 ## Idea
 
