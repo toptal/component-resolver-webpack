@@ -4,6 +4,11 @@
 how to organize components: _**component file should be placed in directory named 
 as component it self**._
 
+* npm: `component-resolver-webpack` [![component-resolver-webpack](http://img.shields.io/npm/v/component-resolver-webpack.svg)]() ([changelog](https://github.com/toptal/component-resolver-webpack/blob/master/docs/CHANGELOG.md))
+* [CI](https://travis-ci.org/toptal/component-resolver-webpack) [![Build Status](https://travis-ci.org/toptal/component-resolver-webpack.svg?branch=master)](https://travis-ci.org/toptal/component-resolver-webpack)
+
+## Idea
+
 It allows to shorten `require` calls and make them more expressive:
 
 ``` js
@@ -70,3 +75,24 @@ module.exports = {
   }
 }
 ```
+
+## Tests
+
+```
+npm test
+```
+
+For watch mode:
+
+```
+npm run-script autotest
+```
+
+## Roadmap
+
+* Simpler API (if it's possible with webpack)
+* README
+
+--
+
+[_License (MIT)_](https://github.com/toptal/component-resolver-webpack/blob/master/docs/LICENSE.md)
