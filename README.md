@@ -89,7 +89,6 @@ npm run-script autotest
 ## Roadmap
 
 * Simpler API (if it's possible with webpack)
-* README
 
 --
 
