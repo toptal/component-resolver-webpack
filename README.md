@@ -3,7 +3,7 @@
 
 [Webpack](http://webpack.github.io) plugin that provides simple convention on
 how to organize components:
-> Component file should be placed in directory named as component itself.
+> The component file should be placed in a directory named as component itself e.g `button.jsx` must be placed inside `button` directorty: `button/button.jsx`.
 
 ## Idea
 
