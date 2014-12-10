@@ -30,11 +30,14 @@ Directory also may contain tests ([Jest](https://facebook.github.io/jest/)-like 
 
 ## Installation
 
+Install via `npm`:
+
 ```
 npm install --save-dev component-resolver-webpack
 ```
 
-`webpack.config.js`:
+Update webpack config (default: `webpack.config.js`):
+
 ``` javascript
 var webpack = require('webpack');
 var ComponentResolverPlugin = require('component-resolver-webpack');
@@ -50,9 +53,8 @@ module.exports = {
 };
 ```
 
-You also may want to specify `modulesDirectories`: 
+You also may want to specify `modulesDirectories` in webpack config: 
 
-`webpack.config.js`:
 ``` javascript
 // ...
 
