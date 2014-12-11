@@ -8,9 +8,10 @@
     "url": "https://github.com/kossnocorp/component-resolver-webpack"
   },
   "keywords": [
-    "webpack"
+    "webpack",
+    "react"
   ],
-  "author": "Sasha Koss <kossnocorp@gmail.com>",
+  "author": "Sasha Koss <sasha@toptal.com>",
   "license": "MIT",
   "peerDependencies": {
     "webpack": "1.x"
