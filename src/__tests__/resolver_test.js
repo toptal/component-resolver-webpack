@@ -182,5 +182,51 @@ describe('ComponentResolverPlugin behavior', function() {
       });
     });
   });
+
+  context('with file named as component and component in the same dir', function() {
+    var request = {
+      path: fixturesDir,
+      request: 'dir_with_file_and_component/component'
+    };
+
+    beforeEach(function() {
+      emulateAndExtract();
+    });
+
+    it('calls doResolve on context with proper arguments', function(done) {
+      var cb = function() {};
+      var doResolve = sinon.spy(resolveContext, 'doResolve');
+      resolveFn(request, cb);
+
+      setTimeout(function() {
+        expect(doResolve).to.be.calledWith(
+          'file',
+          sinon.match({
+            path: path.join(request.path, 'dir_with_file_and_component'),
+            request: 'component.js'
+          },
+          cb
+       ));
+
+        doResolve.restore();
+        done();
+      }, 10);
+    });
+  });
+
+  context('when node module is required', function() {
+    var request = {
+      path: fixturesDir,
+      request: 'dir_with_node_modules/node_modules/component'
+    };
+
+    beforeEach(function() {
+      emulateAndExtract();
+    });
+
+    it('calls callback', function(done) {
+      resolveFn(request, done);
+    });
+  });
 });
 

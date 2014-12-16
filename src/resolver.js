@@ -3,25 +3,54 @@ var path = require('path');
 // Captures component id (e.g 'feedback_form' from 'feedback/feedback_form').
 var COMPONENT_ID_PATTERN = /([^\/]+)$/;
 
+// Captures enclosing dir
+// (e.g '_fixtures/dir_with_file_and_component' from
+// '_fixtures/dir_with_file_and_component/component')
+var ENCLOSING_DIR_PATTERN = /(.+)\/.+$/;
+
 var getResolveComponent = function(exts) {
   return function(request, callback) {
     var enclosingDirPath = path.join(request.path, request.request || '');
     var captured = enclosingDirPath.match(COMPONENT_ID_PATTERN);
 
-    if (captured) {
+    // Ignore npm modules
+    // TODO: Allow to pass ignore patterns
+    var ignored = /node_modules$/.test(
+      enclosingDirPath.match(ENCLOSING_DIR_PATTERN)[1]
+    );
+
+    if (captured && !ignored) {
       var componentId = captured[1];
       var context = this;
 
+      var extObjsForFiles = exts.map(function(ext) {
+        return { ext: ext, file: true };
+      });
+      var extObjs = extObjsForFiles.concat(exts.map(function(ext) {
+        return { ext: ext, file: false };
+      }));
+
       var tryToFindExtension = function(index) {
-        var ext = exts[index];
+        var extObj = extObjs[index];
 
         // None of passed extensions are found
-        if (!ext) {
+        if (!extObj) {
           return callback();
         }
 
-        var componentFileName = componentId + '.' + ext;
-        var componentFilePath = path.join(enclosingDirPath, componentFileName);
+        var resolvePath, componentFileName, componentFilePath;
+
+        // Try to load regular file
+        if (extObj.file) {
+          resolvePath = enclosingDirPath.match(ENCLOSING_DIR_PATTERN)[1];
+          componentFileName = componentId + '.' + extObj.ext;
+          componentFilePath = enclosingDirPath + '.' + extObj.ext;
+
+        } else {
+          resolvePath = enclosingDirPath;
+          componentFileName = componentId + '.' + extObj.ext;
+          componentFilePath = path.join(enclosingDirPath, componentFileName);
+        }
 
         context.fileSystem.stat(componentFilePath, function(err, stats) {
           if (err || !stats.isFile()) {
@@ -29,7 +58,7 @@ var getResolveComponent = function(exts) {
           }
 
           context.doResolve('file', {
-            path: enclosingDirPath,
+            path: resolvePath,
             query: request.query,
             request: componentFileName
           }, callback);
