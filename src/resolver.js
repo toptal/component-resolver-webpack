@@ -1,12 +1,15 @@
 var path = require('path');
 
+// Check if this is a windows runtime or not
+var WIN = /^win/.test(process.platform);
+
 // Captures component id (e.g 'feedback_form' from 'feedback/feedback_form').
 var COMPONENT_ID_PATTERN = /([^\/]+)$/;
 
 // Captures enclosing dir
 // (e.g '_fixtures/dir_with_file_and_component' from
 // '_fixtures/dir_with_file_and_component/component')
-var ENCLOSING_DIR_PATTERN = /(.+)\/.+$/;
+var ENCLOSING_DIR_PATTERN = WIN ? /(.+)\\.+$/ : /(.+)\/.+$/;
 
 var getResolveComponent = function(exts) {
   return function(request, callback) {
