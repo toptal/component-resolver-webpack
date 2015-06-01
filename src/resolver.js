@@ -4,7 +4,7 @@ var path = require('path');
 var WIN = /^win/.test(process.platform);
 
 // Captures component id (e.g 'feedback_form' from 'feedback/feedback_form').
-var COMPONENT_ID_PATTERN = /([^\/]+)$/;
+var COMPONENT_ID_PATTERN = WIN ? /([^\\]+)$/ : /([^\/]+)$/;
 
 // Captures enclosing dir
 // (e.g '_fixtures/dir_with_file_and_component' from
