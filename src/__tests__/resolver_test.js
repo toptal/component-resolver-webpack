@@ -228,5 +228,38 @@ describe('ComponentResolverPlugin behavior', function() {
       resolveFn(request, done);
     });
   });
+
+  context('when absolute path is provided', function() {
+    var request = {
+      path: fixturesDir,
+      query: 'qwerty',
+      request: path.join(fixturesDir, 'dir_with_file')
+    };
+
+    beforeEach(function() {
+      emulateAndExtract();
+    });
+
+    it('evaluates the absolute path as-is', function(done) {
+      var cb = function() {};
+      var doResolve = sinon.spy(resolveContext, 'doResolve');
+      resolveFn(request, cb);
+
+      setTimeout(function() {
+        expect(doResolve).to.be.calledWithExactly(
+          'file',
+          sinon.match({
+            path: path.join(fixturesDir, 'dir_with_file'),
+            query: 'qwerty',
+            request: 'dir_with_file.jsx'
+          }),
+          cb
+        );
+
+        doResolve.restore();
+        done();
+      }, 10);
+    });
+  });
 });
 
