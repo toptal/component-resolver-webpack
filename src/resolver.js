@@ -10,7 +10,10 @@ var ENCLOSING_DIR_PATTERN = /(.+)\/.+$/;
 
 var getResolveComponent = function(exts) {
   return function(request, callback) {
-    var enclosingDirPath = path.join(request.path, request.request || '');
+    var enclosingDirPath = request.request || '';
+    if (enclosingDirPath.indexOf('/') !== 0) {
+      enclosingDirPath = path.join(request.path, enclosingDirPath);
+    }
     var captured = enclosingDirPath.match(COMPONENT_ID_PATTERN);
 
     // Ignore npm modules
