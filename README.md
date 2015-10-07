@@ -1,5 +1,5 @@
 # component-resolver-webpack
-[![Build Status](https://travis-ci.org/toptal/component-resolver-webpack.svg?branch=master)](https://travis-ci.org/toptal/component-resolver-webpack) [![component-resolver-webpack](http://img.shields.io/npm/v/component-resolver-webpack.svg)]()`component-resolver-webpack` ([changelog](https://github.com/toptal/component-resolver-webpack/blob/master/docs/CHANGELOG.md))
+[![Build Status](https://travis-ci.org/toptal/component-resolver-webpack.svg?branch=master)](https://travis-ci.org/toptal/component-resolver-webpack) [![Build status](https://ci.appveyor.com/api/projects/status/qmvi3h6lk0xu8833?svg=true)](https://ci.appveyor.com/project/kossnocorp/component-resolver-webpack)
 
 [Webpack](http://webpack.github.io) plugin that provides simple convention on
 how to organize components:
@@ -18,7 +18,7 @@ var Button = require('ui/button/button.jsx');
 **Why not `'ui/button.jsx'`?**
 
 Because then you can use directories as module containers. As an example, you can
-combine `component-resolver-webpack` with 
+combine `component-resolver-webpack` with
 [`component-css-loader`](https://github.com/toptal/component-css-loader):
 
 ``` js
@@ -56,14 +56,14 @@ module.exports = {
 };
 ```
 
-You also may want to specify `modulesDirectories` in webpack config: 
+You also may want to specify `modulesDirectories` in webpack config:
 
 ``` javascript
 // ...
 
 module.exports = {
   // ...
-  
+
   resolve: {
     modulesDirectories: [
       // It will allow to use path without leading `./` in require
