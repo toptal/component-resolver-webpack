@@ -14,7 +14,7 @@ var ENCLOSING_DIR_PATTERN = WIN ? /(.+)\\.+$/ : /(.+)\/.+$/;
 var getResolveComponent = function(exts) {
   return function(request, callback) {
     var enclosingDirPath = request.request || '';
-    if (enclosingDirPath.indexOf('/') !== 0) {
+    if (!path.isAbsolute(enclosingDirPath)) {
       enclosingDirPath = path.join(request.path, enclosingDirPath);
     }
     var captured = enclosingDirPath.match(COMPONENT_ID_PATTERN);
