@@ -88,8 +88,10 @@ npm run-script autotest
 
 ## Roadmap
 
+* Ignore patterns (like `node_modules`)
 * Simpler API (if it's possible with webpack)
 
 --
 
 [_License (MIT)_](https://github.com/toptal/component-resolver-webpack/blob/master/docs/LICENSE.md)
+
