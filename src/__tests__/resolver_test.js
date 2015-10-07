@@ -88,15 +88,15 @@ describe('ComponentResolverPlugin behavior', function() {
         resolveFn(request, cb);
 
         setTimeout(function() {
-          expect(doResolve).to.be.calledWith(
+          expect(doResolve).to.be.calledWithExactly(
             'file',
             sinon.match({
               path: path.join(request.path, request.request),
               query: 'qwerty',
               request: request.request + '.jsx'
-            },
+            }),
             cb
-         ));
+         );
 
           doResolve.restore();
           done();
@@ -111,7 +111,7 @@ describe('ComponentResolverPlugin behavior', function() {
     });
   });
 
-  context('with specefied extensions', function() {
+  context('with specified extensions', function() {
     var request = {
       path: fixturesDir,
       request: 'dir_with_few_files',
@@ -139,15 +139,15 @@ describe('ComponentResolverPlugin behavior', function() {
         resolveFn(request, cb);
 
         setTimeout(function() {
-          expect(doResolve).to.be.calledWith(
+          expect(doResolve).to.be.calledWithExactly(
             'file',
             sinon.match({
               path: path.join(request.path, request.request),
               query: 'qwerty',
               request: request.request + '.js'
-            },
+            }),
             cb
-         ));
+         );
 
           doResolve.restore();
           done();
@@ -166,15 +166,15 @@ describe('ComponentResolverPlugin behavior', function() {
         resolveFn(request, cb);
 
         setTimeout(function() {
-          expect(doResolve).to.be.calledWith(
+          expect(doResolve).to.be.calledWithExactly(
             'file',
             sinon.match({
               path: path.join(request.path, request.request),
               query: 'qwerty',
               request: request.request + '.jsx'
-            },
+            }),
             cb
-         ));
+         );
 
           doResolve.restore();
           done();
@@ -199,14 +199,14 @@ describe('ComponentResolverPlugin behavior', function() {
       resolveFn(request, cb);
 
       setTimeout(function() {
-        expect(doResolve).to.be.calledWith(
+        expect(doResolve).to.be.calledWithExactly(
           'file',
           sinon.match({
             path: path.join(request.path, 'dir_with_file_and_component'),
             request: 'component.js'
-          },
+          }),
           cb
-       ));
+       );
 
         doResolve.restore();
         done();
